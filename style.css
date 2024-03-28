@@ -33,3 +33,7 @@
   .card:hover {
     transform: scale(1.05);
   }
+
+#activityInput{
+    height: 30vh;
+  }

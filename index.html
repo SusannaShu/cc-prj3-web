@@ -9,6 +9,22 @@
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
     />
     <style>
+      body,
+      h5,
+      p,
+      button {
+        color: hotpink; /* This is a shade of hotpink. You can adjust the color code to get the exact shade you want */
+      }
+
+      .btn-primary {
+        background-color: hotpink;
+        border-color: hotpink; /* Adjust the border color to match the background */
+      }
+
+      .btn-primary:hover {
+        background-color: hotpink; /* A slightly darker hotpink for hover effect */
+        border-color: hotpink;
+      }
       .icon-box {
         text-align: center;
         padding: 20px;
@@ -43,13 +59,22 @@
       .card:hover {
         transform: scale(1.05);
       }
+      #menu {
+        width: 100vw;
+        text-align: center;
+        font-size: 50px;
+      }
+      .mt-5 {
+        padding-bottom: 50px;
+        border-bottom: 1px solid rgb(210, 210, 210);
+      }
     </style>
   </head>
   <body>
     <header>
-      <div><button class="btn btn-primary">Past Tracks</button></div>
-      <div>Life Tracker</div>
-      <div>
+      <!-- <div><button class="btn btn-primary">Past Tracks</button></div> -->
+      <div id="menu">Life Tracker</div>
+      <!-- <div>
         <span class="btn btn-light">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -66,99 +91,142 @@
             />
           </svg>
         </span>
-      </div>
+      </div> -->
     </header>
 
     <div class="container mt-5">
-      <div class="row row-cols-1 row-cols-md-3 g-4">
-        <div class="col">
-          <div class="card text-center p-3" onclick="addLifeAspect()">
-            <div class="card-body">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="50"
-                height="50"
-                fill="currentColor"
-                class="bi bi-plus-square"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"
-                />
-                <path
-                  d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"
-                />
-              </svg>
-             
-            </div>
-            <p class="card-text">                Add an aspect of your life to track.
-            </p>
-
-          </div>
-        </div>
-        <div class="col">
-          <div class="card h-100 text-center p-3" onclick="trackSleep()">
-            <div class="card-body">
-              <h5 class="card-title"><i class="bi bi-moon"></i> Sleep</h5>
-              <p class="card-text">Track your sleep patterns.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card h-100 text-center p-3" onclick="trackEating()">
-            <div class="card-body">
-              <h5 class="card-title"><i class="bi bi-cup-straw"></i> Eat</h5>
-              <p class="card-text">Log your daily food intake.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card h-100 text-center p-3" onclick="trackExercise()">
-            <div class="card-body">
-              <h5 class="card-title"><i class="bi bi-bicycle"></i> Exercise</h5>
-              <p class="card-text">Keep a record of your exercises.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card h-100 text-center p-3" onclick="trackWorkStudy()">
-            <div class="card-body">
-              <h5 class="card-title">
-                <i class="bi bi-laptop"></i> Work/Study
-              </h5>
-              <p class="card-text">Log hours spent on work or study.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card h-100 text-center p-3" onclick="openSettings()">
-            <div class="card-body">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="50"
-                height="50"
-                fill="currentColor"
-                class="bi bi-pencil-square"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
-                />
-                <path
-                  fill-rule="evenodd"
-                  d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"
-                />
-              </svg>
-            </div>
-            <p class="card-text">Edit Aspects of Life</p>
-
-          </div>
-        </div>
+      <div class="row row-cols-1 row-cols-md-4 g-4" id="activityCardsContainer">
+        <!-- Dynamic cards will be added here -->
       </div>
     </div>
 
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.0/js/bootstrap.bundle.min.js"></script>
+    <div class="container mt-5">
+      <div class="row row-cols-1 row-cols-md-4 g-4" id="activitiesContainer">
+        <!-- Dynamic cards will be added here -->
+      </div>
+    </div>
 
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const activities = [
+          {
+            id: 'Sleep',
+            title: 'Sleep',
+            icon: 'bi-moon',
+            description: 'Track your sleep patterns.'
+          },
+          {
+            id: 'Eat',
+            title: 'Eat',
+            icon: 'bi-cup-straw',
+            description: 'Log your daily food intake.'
+          },
+          {
+            id: 'Exercise',
+            title: 'Exercise',
+            icon: 'bi-bicycle',
+            description: 'Keep a record of your exercises.'
+          },
+          {
+            id: 'WorkStudy',
+            title: 'Work/Study',
+            icon: 'bi-laptop',
+            description: 'Log hours spent on work or study.'
+          }
+        ]
+
+        const container = document.getElementById('activityCardsContainer')
+
+        activities.forEach(activity => {
+          const colDiv = document.createElement('div')
+          colDiv.classList.add('col')
+
+          const cardDiv = document.createElement('div')
+          cardDiv.classList.add('card', 'h-100', 'text-center', 'p-3')
+          cardDiv.setAttribute('onclick', `redirectToForm('${activity.id}')`)
+
+          const bodyDiv = document.createElement('div')
+          bodyDiv.classList.add('card-body')
+
+          const titleH5 = document.createElement('h5')
+          titleH5.classList.add('card-title')
+          titleH5.innerHTML = `<i class="bi ${activity.icon}"></i> ${activity.title}`
+
+          const textP = document.createElement('p')
+          textP.classList.add('card-text')
+          textP.textContent = activity.description
+
+          bodyDiv.appendChild(titleH5)
+          bodyDiv.appendChild(textP)
+
+          cardDiv.appendChild(bodyDiv)
+          colDiv.appendChild(cardDiv)
+
+          container.appendChild(colDiv)
+        })
+      })
+
+      function redirectToForm(activity) {
+        localStorage.setItem('currentActivity', activity)
+        window.location.href = 'activityInput.html'
+      }
+      function editActivity(index) {
+        localStorage.setItem('editIndex', index.toString()) // Store the index of the activity to be edited
+        window.location.href = 'activityInput.html' // Redirect to the input form
+      }
+      document.addEventListener('DOMContentLoaded', function () {
+        const activitiesContainer = document.getElementById(
+          'activitiesContainer'
+        )
+        let activities = JSON.parse(localStorage.getItem('activities')) || []
+
+        activities.forEach((activity, index) => {
+          const colDiv = document.createElement('div')
+          colDiv.className = 'col'
+          const cardDiv = document.createElement('div')
+          cardDiv.className = 'card h-100 text-center p-3'
+
+          const cardBodyDiv = document.createElement('div')
+          cardBodyDiv.className = 'card-body'
+
+          const cardTitleH5 = document.createElement('h5')
+          cardTitleH5.className = 'card-title'
+          cardTitleH5.innerText = activity.name
+
+          const cardTextP = document.createElement('p')
+          cardTextP.className = 'card-text'
+          cardTextP.innerText = activity.input
+
+          const cardDateP = document.createElement('p')
+          cardDateP.className = 'card-text'
+          cardDateP.style.fontSize = '0.8rem'
+          cardDateP.style.color = 'gray'
+          cardDateP.innerText = `Added on: ${activity.dateCreated}`
+
+          const editButton = document.createElement('button')
+          editButton.className = 'btn btn-primary mt-2'
+          editButton.innerText = 'Edit'
+          editButton.addEventListener(
+            'click',
+            (function (indexCopy) {
+              return function () {
+                editActivity(indexCopy)
+              }
+            })(index)
+          )
+
+          cardBodyDiv.appendChild(cardTitleH5)
+          cardBodyDiv.appendChild(cardTextP)
+          cardBodyDiv.appendChild(cardDateP)
+          cardBodyDiv.appendChild(editButton) // Append the edit button to the card
+          cardDiv.appendChild(cardBodyDiv)
+          colDiv.appendChild(cardDiv)
+          activitiesContainer.appendChild(colDiv)
+        })
+      })
+    </script>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.0/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>

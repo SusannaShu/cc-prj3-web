@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <style>
+      body,
+      h5,
+      p,
+      button {
+        color: hotpink; /* This is a shade of hotpink. You can adjust the color code to get the exact shade you want */
+      }
+
+      .btn-primary {
+        background-color: hotpink;
+        border-color: hotpink; /* Adjust the border color to match the background */
+      }
+
+      .btn-primary:hover {
+        background-color: hotpink; /* A slightly darker hotpink for hover effect */
+        border-color: hotpink;
+      }
+      .text {
+        height: 30vh;
+      }
+
+      .date {
+        width: 50vw;
+      }
+
+      .mt-5 {
+        padding: 30px;
+      }
+    </style>
+    <title>Input Activity</title>
+  </head>
+  <body>
+    <div class="container mt-5">
+      <h1 id="activityTitle"></h1>
+      <form id="activityForm">
+        <div class="mb-3">
+          <label for="activityInput" class="form-label"
+            >Take some notes today</label
+          >
+          <input
+            type="text"
+            class="form-control text"
+            id="activityInput"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="activityDate" class="form-label">Date</label>
+          <input
+            type="date"
+            class="form-control date"
+            id="activityDate"
+            required
+          />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Confirm</button>
+      </form>
+    </div>
+
+    <script>
+      document.getElementById('activityTitle').innerText =
+        localStorage.getItem('currentActivity') || 'Activity'
+
+      document.addEventListener('DOMContentLoaded', function () {
+        const editIndex = localStorage.getItem('editIndex')
+        if (editIndex !== null) {
+          const activities =
+            JSON.parse(localStorage.getItem('activities')) || []
+          if (activities[editIndex]) {
+            // Ensure the activity exists
+            document.getElementById('activityInput').value =
+              activities[editIndex].input
+            document.getElementById('activityDate').value =
+              activities[editIndex].dateCreated
+          }
+        }
+      })
+
+      document
+        .getElementById('activityForm')
+        .addEventListener('submit', function (e) {
+          e.preventDefault()
+          const activityName = localStorage.getItem('currentActivity')
+          const input = document.getElementById('activityInput').value
+          const dateCreated = document.getElementById('activityDate').value // Retrieve the date from the new input
+
+          // Validate if dateCreated is not empty; you might want to handle it differently based on your requirements
+          if (!dateCreated) {
+            alert('Please select a date.')
+            return
+          }
+
+          let activities = JSON.parse(localStorage.getItem('activities')) || []
+
+          activities.push({
+            name: activityName,
+            input: input,
+            dateCreated: dateCreated
+          })
+          const editIndex = localStorage.getItem('editIndex')
+          if (editIndex !== null) {
+            // If editing, update the specific activity
+            activities[editIndex] = {
+              name: activityName,
+              input: input,
+              dateCreated: dateCreated
+            }
+            localStorage.removeItem('editIndex') // Clear the edit indicator
+          } else {
+            // If not editing, add a new activity
+            activities.push({
+              name: activityName,
+              input: input,
+              dateCreated: dateCreated
+            })
+          }
+
+          localStorage.setItem('activities', JSON.stringify(activities))
+
+          window.location.href = 'index.html'
+        })
+    </script>
+  </body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sleep Input</title>
+    <style>
+      body,
+      h5,
+      p,
+      button {
+        color: hotpink; /* This is a shade of hotpink. You can adjust the color code to get the exact shade you want */
+      }
+
+      .btn-primary {
+        background-color: hotpink;
+        border-color: hotpink; /* Adjust the border color to match the background */
+      }
+
+      .btn-primary:hover {
+        background-color: hotpink; /* A slightly darker hotpink for hover effect */
+        border-color: hotpink;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Sleep</h1>
+    <form id="inputForm">
+      <input
+        type="text"
+        id="userInput"
+        placeholder="Enter details here"
+        required
+      />
+      <button type="submit">Confirm</button>
+    </form>
+
+    <script>
+      document
+        .getElementById('inputForm')
+        .addEventListener('submit', function (e) {
+          e.preventDefault()
+          const input = document.getElementById('userInput').value
+          // Retrieve existing cards from local storage, if any
+          const savedCards =
+            JSON.parse(localStorage.getItem('savedCards')) || []
+          // Add the new card
+          savedCards.push({ title: 'Sleep', input: input })
+          // Save back to local storage
+          localStorage.setItem('savedCards', JSON.stringify(savedCards))
+          // Redirect back to the main page
+          window.location.href = 'index.html'
+        })
+    </script>
+  </body>
+</html>

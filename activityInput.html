@@ -102,11 +102,7 @@
 
           let activities = JSON.parse(localStorage.getItem('activities')) || []
 
-          activities.push({
-            name: activityName,
-            input: input,
-            dateCreated: dateCreated
-          })
+          
           const editIndex = localStorage.getItem('editIndex')
           if (editIndex !== null) {
             // If editing, update the specific activity
